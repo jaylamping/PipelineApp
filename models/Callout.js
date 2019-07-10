@@ -22,16 +22,7 @@ const calloutSchema = new Schema({
   alarmDtTm: {
     type: Date
   },
-  contactDtTm: {
-    type: Date
-  },
-  normalDtTm: {
-    type: Date
-  },
-  standbyDtTm: {
-    type: Date
-  },
-  additionalNotes: {
+  addNotes: {
     type: String
   }
 });
