@@ -1,22 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-// callout model
+const asyncHandler = require('../../utils/asyncHandler');
 const Callout = require('../../models/Callout');
 
 // @route GET api/callouts
 // @desc Get All Callouts
 // @access Public
-router.get('/', (req, res) => {
-  Callout.find()
-    .sort({ date: -1 })
-    .then(callouts => res.json(callouts))
-});
+router.get('/', asyncHandler(async (req, res) => {
+    res.json(await Callout.find());
+}));
 
 // @route POST api/callouts
 // @desc Post a callout
 // @access Public
-router.post('/', (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
   const newCallout = new Callout({
     compressor: req.body.compressor,
     explanation: req.body.explanation,
@@ -24,17 +22,15 @@ router.post('/', (req, res) => {
     alarmDtTm: req.body.alarmDtTm,
     addNotes: req.body.addNotes
   });
-  newCallout.save()
-    .then(callout => res.json(callout));
-});
+  res.json(await newCallout.save())
+}));
 
 // @route DELETE api/callouts/:id
 // @desc Delete a callout
 // @access Public
-router.delete('/:id', (req, res) => {
-  Callout.findById(req.params.id)
-    .then(callout => callout.remove().then(() => res.json({ success: true })))
-    .catch(err => res.status(404).json({ success: false }))
-});
+router.delete('/:id', asyncHandler(async (req, res) => {
+  let document = await Callout.findById(req.params.id);
+  res.json(await document.remove())
+}));
 
 module.exports = router;
