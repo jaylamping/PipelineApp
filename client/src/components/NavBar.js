@@ -27,18 +27,18 @@ class NavBar extends Component {
       <div>
         <Navbar color='dark' dark expand='sm' className='mb-5'>
           <Container>
-            <NavbarBrand href='/'>Callout List</NavbarBrand>
+            <NavbarBrand href='/'>Comp Tracker</NavbarBrand>
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className='ml-auto' navbar>
                   <NavItem>
-                    <NavLink href='https://github.com'>
+                    <NavLink href='https://github.com/jaylamping/PipelineApp' target='_blank'>
                       Github
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink href='https://youtube.com'>
-                      YouTube
+                    <NavLink href='https://www.oneok.com' target='_blank'>
+                      ONEOK
                     </NavLink>
                   </NavItem>
                 </Nav>
