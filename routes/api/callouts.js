@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const asyncHandler = require('../../utils/asyncHandler');
+const asyncHandler = require('../../util/asyncHandler');
 const Callout = require('../../models/Callout');
 
 // @route GET api/callouts

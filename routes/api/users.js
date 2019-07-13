@@ -4,7 +4,7 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-const asyncHandler = require('../../utils/asyncHandler');
+const asyncHandler = require('../../util/asyncHandler');
 const User = require('../../models/User');
 
 // @route POST api/users
