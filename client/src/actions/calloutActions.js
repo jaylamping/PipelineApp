@@ -1,21 +1,44 @@
-import { GET_CALLOUTS, ADD_CALLOUT, DELETE_CALLOUT } from '../actions/types';
+import { GET_CALLOUTS, ADD_CALLOUT, DELETE_CALLOUT, CALLOUT_LOADING } from '../actions/types';
+import axios from 'axios';
 
-export const getCallouts = () => {
-  return {
-    type: GET_CALLOUTS
-  };
+export const getCallouts = () => dispatch => {
+  dispatch(setCalloutLoading());
+  axios
+    .get('/api/callouts')
+    .then(res => 
+      dispatch({
+        type: GET_CALLOUTS,
+        payload: res.data
+      })
+    );
 };
 
-export const deleteCallout = id => {
-  return {
-    type: DELETE_CALLOUT,
-    payload: id
-  };
+export const addCallout = callout => dispatch => {
+  axios
+    .post('api/callouts', callout)
+    .then(res => 
+      dispatch({
+        type: ADD_CALLOUT,
+        payload: res.data
+      })
+    )
 };
 
-export const addCallout = callout => {
+export const deleteCallout = id => dispatch => {
+  axios
+    .delete(`/api/callouts/${id}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_CALLOUT,
+        payload: id
+      })
+    )
+};
+
+
+
+export const setCalloutLoading = () => {
   return {
-    type: ADD_CALLOUT,
-    payload: callout
+    type: CALLOUT_LOADING
   };
 };

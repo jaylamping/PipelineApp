@@ -21,19 +21,19 @@ class OpenCallouts extends Component {
       <Container>
         <ListGroup>
           <TransitionGroup className='open-callout-list'>
-            {callouts.map(({ id, compressor, area, explanation, operator }) => (
-              <CSSTransition key={id} timeout={500} classNames='fade'>
+            {callouts.map(({ _id, compressor, area, explanation, operator }) => (
+              <CSSTransition key={_id} timeout={500} classNames='fade'>
                 <ListGroupItem>
                   { compressor } | <span/>
                   { area } | <span/>
                   { explanation } | <span/>
                   { operator } | <span/>
-                  { id }
+                  { _id }
                   <Button
                     className='remove-btn'
                     color='danger'
                     size='sm'
-                    onClick={this.onDeleteClick.bind(this, id)}
+                    onClick={this.onDeleteClick.bind(this, _id)}
                   >&times;</Button>
                 </ListGroupItem>
               </CSSTransition>

@@ -22,6 +22,7 @@ router.post(
   asyncHandler(async (req, res) => {
     const newCallout = new Callout({
       compressor: req.body.compressor,
+      area: req.body.area,
       explanation: req.body.explanation,
       operator: req.body.operator,
       alarmDtTm: req.body.alarmDtTm,

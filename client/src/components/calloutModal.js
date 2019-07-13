@@ -11,7 +11,6 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addCallout } from '../actions/calloutActions';
-import uuid from 'uuid';
 
 class CalloutModal extends Component {
   state = {
@@ -35,7 +34,6 @@ class CalloutModal extends Component {
   onSubmit = e => {
     e.preventDefault();
     const newCallout = {
-      id: uuid(),
       compressor: this.state.compressor,
       area: this.state.area,
       explanation: this.state.explanation,
