@@ -26,16 +26,23 @@ class CalloutModal extends Component {
   };
 
   onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.compressor]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
     const newCallout = {
       id: uuid(),
+      compressor: this.state.compressor
+    };
+    // Add Callout via addCallout action
+    this.props.addCallout(newCallout);
+    // Close modal
+    this.toggle();
+  };
 
-    }
-  }
+
+
 
   render() {
     return(
@@ -43,7 +50,7 @@ class CalloutModal extends Component {
         <Button
           color='dark'
           style={{ marginBottom: '2rem' }}
-          onClick={this.toggle}
+          onClick={ this.toggle }
         >Add Callout</Button>
 
         <Modal
@@ -51,21 +58,21 @@ class CalloutModal extends Component {
           toggle={ this.toggle }
           centered={ true }
         >
-          <ModalHeader toggle={this.toggle}>Add to Callout List</ModalHeader>
+          <ModalHeader toggle={ this.toggle }>Add to Callout List</ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.onSubmit}>
+            <Form onSubmit={ this.onSubmit }>
               <FormGroup>
                 <Label for='callout'>Callout</Label>
                 <Input
                   type='text'
-                  name='callout-input'
+                  compressor='callout-input'
                   id='callout'
                   placeholder='Add Callout record'
-                  onChange={this.onChange}
+                  onChange={ this.onChange }
                 ></Input>
                 <Button 
                   color='dark'
-                  style={{marginTop: '2rem' }} block  
+                  style={{ marginTop: '2rem' }} block  
                 >Add Callout</Button>
               </FormGroup>
             </Form>
@@ -81,4 +88,11 @@ class CalloutModal extends Component {
 
 };
 
-export default connect()(CalloutModal);
+const mapStateToProps = state => ({
+  callout: state.callout
+});
+
+export default connect(
+  mapStateToProps, 
+  { addCallout }
+)(CalloutModal);

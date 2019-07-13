@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getCallouts, deleteCallout } from '../actions/calloutActions';
+import { getCallouts, deleteCallout, addCallout } from '../actions/calloutActions';
 import PropTypes from 'prop-types';
 
 class OpenCallouts extends Component {
@@ -54,5 +54,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps, 
-  { getCallouts, deleteCallout }
+  { getCallouts, deleteCallout, addCallout }
 )(OpenCallouts);

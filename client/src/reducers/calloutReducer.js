@@ -21,6 +21,11 @@ export default function(state = initialState, action) {
         ...state,
         callouts: state.callouts.filter(click => click.id !== action.payload)
       };
+    case ADD_CALLOUT:
+        return {
+          ...state,
+          callouts: [action.payload, ...state.callouts]
+        };
     default:
       return state;
   };

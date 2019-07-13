@@ -12,3 +12,10 @@ export const deleteCallout = id => {
     payload: id
   };
 };
+
+export const addCallout = callout => {
+  return {
+    type: ADD_CALLOUT,
+    payload: callout
+  };
+};
