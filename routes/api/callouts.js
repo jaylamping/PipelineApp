@@ -7,9 +7,9 @@ const Callout = require('../../models/Callout');
 
 // @route GET api/callouts
 // @desc Get All Callouts
-// @access Public
+// @access Private
 router.get(
-  '/', 
+  '/',
   asyncHandler(async (req, res) => {
     res.json(await Callout.find());
   })
@@ -41,8 +41,8 @@ router.delete(
   '/:id',
   authHandler,
   asyncHandler(async (req, res) => {
-    let document = await Callout.findById(req.params.id);
-    res.json(await document.remove())
+    let doc = await Callout.findById(req.params.id);
+    res.json(await doc.remove())
   })
 );
 

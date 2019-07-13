@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
+import authReducer from './authReducer';
 import calloutReducer from './calloutReducer';
+import errorReducer from './errorReducer';
 
 export default combineReducers({
-  callout: calloutReducer
+  auth: authReducer,
+  callout: calloutReducer,
+  error: errorReducer
 });
