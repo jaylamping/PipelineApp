@@ -5,3 +5,10 @@ export const getCallouts = () => {
     type: GET_CALLOUTS
   };
 };
+
+export const deleteCallout = id => {
+  return {
+    type: DELETE_CALLOUT,
+    payload: id
+  };
+};

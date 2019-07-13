@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-import uuid from 'uuid';
-
 import { connect } from 'react-redux';
-import { getCallouts } from '../actions/calloutActions';
+import { getCallouts, deleteCallout } from '../actions/calloutActions';
 import PropTypes from 'prop-types';
 
 class OpenCallouts extends Component {
 
   componentDidMount() {
     this.props.getCallouts();
+  };
+
+  onDeleteClick = id => {
+    this.props.deleteCallout(id);
   };
 
   render() {
@@ -30,31 +31,13 @@ class OpenCallouts extends Component {
                     className='remove-btn'
                     color='danger'
                     size='sm'
-                    onClick={() => {
-                      this.setState(state => ({
-                        callouts: state.callouts.filter(click => click.id !== id)
-                      }));
-                    }}
+                    onClick={this.onDeleteClick.bind(this, id)}
                   >&times;</Button>
                 </ListGroupItem>
               </CSSTransition>
             ))}
           </TransitionGroup>
         </ListGroup>
-        <Button
-          color='dark'
-          style={{marginBottom: '2rem', marginTop: '2rem'}}
-          onClick={() => {
-            const compressor = prompt('Enter Callout');
-            if (compressor) {
-              this.setState(state => ({
-                callouts: [...state.callouts, { id: uuid(), compressor}]
-              }))
-            };
-          }}
-        >
-          Log Callout
-        </Button>
       </Container>
     )
   }
@@ -69,4 +52,7 @@ const mapStateToProps = (state) => ({
   callout: state.callout
 });
 
-export default connect(mapStateToProps, { getCallouts })(OpenCallouts);
+export default connect(
+  mapStateToProps, 
+  { getCallouts, deleteCallout }
+)(OpenCallouts);
