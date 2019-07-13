@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const config = require('config');
 
 // initialize express
 const app = express();
@@ -8,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 // assign db config
-const db = require('./config/keys').mongoURI;
+const db = config.get('mongoURI');
 
 // connect to mongodb
 mongoose.connect(db, {
@@ -31,3 +32,4 @@ app.listen(port, () => {
 // use routes
 app.use('/api/callouts', require('./routes/api/callouts'));
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
