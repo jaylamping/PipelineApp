@@ -111,7 +111,6 @@ class CalloutModal extends Component {
       </div>
     );
   }
-
 };
 
 const mapStateToProps = state => ({
