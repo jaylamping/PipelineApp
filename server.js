@@ -1,22 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-
-const callouts = require('./routes/api/callouts');
 
 // initialize express
 const app = express();
 
 // body-parser middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 // assign db config
 const db = require('./config/keys').mongoURI;
 
 // connect to mongodb
-mongoose.connect(db, {useNewUrlParser: true})
+mongoose.connect(db, {
+  useNewUrlParser: true,
+  useCreateIndex: true
+  })
   .then(() => {
-    console.log('MongoDB connected');
+    console.log('MongoDB connected...');
   })
   .catch(err => {
     console.log(err);
@@ -29,4 +29,5 @@ app.listen(port, () => {
 });
 
 // use routes
-app.use('/api/callouts', callouts);
+app.use('/api/callouts', require('./routes/api/callouts'));
+app.use('/api/users', require('./routes/api/users'));
