@@ -21,10 +21,12 @@ class OpenCallouts extends Component {
       <Container>
         <ListGroup>
           <TransitionGroup className='open-callout-list'>
-            {callouts.map(({ id, compressor, operator }) => (
+            {callouts.map(({ id, compressor, area, explanation, operator }) => (
               <CSSTransition key={id} timeout={500} classNames='fade'>
                 <ListGroupItem>
                   { compressor } | <span/>
+                  { area } | <span/>
+                  { explanation } | <span/>
                   { operator } | <span/>
                   { id }
                   <Button
@@ -40,7 +42,7 @@ class OpenCallouts extends Component {
         </ListGroup>
       </Container>
     )
-  }
+  };
 };
 
 OpenCallouts.propTypes = {
@@ -48,7 +50,7 @@ OpenCallouts.propTypes = {
   callout: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   callout: state.callout
 });
 

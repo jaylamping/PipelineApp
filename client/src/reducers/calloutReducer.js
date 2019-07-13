@@ -3,10 +3,11 @@ import { GET_CALLOUTS, ADD_CALLOUT, DELETE_CALLOUT } from '../actions/types';
 
 const initialState = {
   callouts: [
-    { id: uuid(), compressor: 'Rupe', operator: 'Zak Goerke' },
-    { id: uuid(), compressor: 'Zenith', operator: 'Joey Lamping' },
-    { id: uuid(), compressor: 'Kirkman', operator: 'Travis Seipel' },
-    { id: uuid(), compressor: 'Brehm', operator: 'Collin Ayer' }
+    { id: uuid(), compressor: 'Rupe', operator: 'Zak Goerke', area: 'Tulsa', explanation: 'No Lube' },
+    { id: uuid(), compressor: 'Zenith', operator: 'Joey Lamping', area: 'Kansas City', explanation: 'High Temp' },
+    { id: uuid(), compressor: 'Kirkman', operator: 'Travis Seipel', area: 'Kansas City', explanation: 'Unit Startup' },
+    { id: uuid(), compressor: 'Brehm', operator: 'Collin Ayer', area: 'Las Vegas', explanation: 'Unit downtime' },
+    { id: uuid(), compressor: 'Brodie', operator: 'Andy Lavin', area: 'California', explanation: 'No Lube' }
   ]
 };
 

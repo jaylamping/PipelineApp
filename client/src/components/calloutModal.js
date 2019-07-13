@@ -16,7 +16,10 @@ import uuid from 'uuid';
 class CalloutModal extends Component {
   state = {
     modal: false,
-    compressor: ''
+    compressor: '',
+    area: '',
+    explanation: '',
+    operator: ''
   };
 
   toggle = () => {
@@ -26,23 +29,23 @@ class CalloutModal extends Component {
   };
 
   onChange = (e) => {
-    this.setState({ [e.target.compressor]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
     const newCallout = {
       id: uuid(),
-      compressor: this.state.compressor
+      compressor: this.state.compressor,
+      area: this.state.area,
+      explanation: this.state.explanation,
+      operator: this.state.operator
     };
     // Add Callout via addCallout action
     this.props.addCallout(newCallout);
     // Close modal
     this.toggle();
   };
-
-
-
 
   render() {
     return(
@@ -62,13 +65,42 @@ class CalloutModal extends Component {
           <ModalBody>
             <Form onSubmit={ this.onSubmit }>
               <FormGroup>
-                <Label for='callout'>Callout</Label>
+                <Label for='callout'>Enter Callout Information</Label>
                 <Input
                   type='text'
-                  compressor='callout-input'
-                  id='callout'
-                  placeholder='Add Callout record'
+                  name='compressor'
+                  id='compressor-input'
+                  value={ this.state.value }
+                  placeholder='Enter Compressor Name'
                   onChange={ this.onChange }
+                  required={ true }
+                  className='input-field'
+                ></Input>
+                <Input
+                  type='text'
+                  name='area'
+                  id='area-input'
+                  placeholder='Enter Area'
+                  onChange={ this.onChange }
+                  required={ true }
+                  className='input-field'
+                ></Input>
+                <Input
+                  type='text'
+                  name='operator'
+                  id='operator-input'
+                  placeholder='Enter Operator Name'
+                  onChange={ this.onChange }
+                  required={ true }
+                  className='input-field'
+                ></Input>
+                <Input
+                  type='text'
+                  name='explanation'
+                  id='explanation-input'
+                  placeholder='Enter Explanation'
+                  onChange={ this.onChange }
+                  className='input-field'
                 ></Input>
                 <Button 
                   color='dark'
@@ -81,10 +113,6 @@ class CalloutModal extends Component {
       </div>
     );
   }
-
-
-
-
 
 };
 
