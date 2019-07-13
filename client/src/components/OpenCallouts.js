@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 import uuid from 'uuid';
 
+import { connect } from 'react-redux';
+import { getCallouts } from '../actions/calloutActions';
+import PropTypes from 'prop-types';
+
 class OpenCallouts extends Component {
-  state = {
-    callouts: [
-      { id: uuid(), compressor: 'Rupe', operator: 'Zak Goerke' },
-      { id: uuid(), compressor: 'Zenith', operator: 'Joey Lamping' },
-      { id: uuid(), compressor: 'Kirkman', operator: 'Travis Seipel' },
-      { id: uuid(), compressor: 'Brehm', operator: 'Collin Ayer' }
-    ]
-  }
+
+  componentDidMount() {
+    this.props.getCallouts();
+  };
 
   render() {
-    const { callouts } = this.state;
+    const { callouts } = this.props.callout; 
     return(
       <Container>
         <ListGroup>
@@ -59,4 +60,13 @@ class OpenCallouts extends Component {
   }
 };
 
-export default OpenCallouts;
+OpenCallouts.propTypes = {
+  getCallouts: PropTypes.func.isRequired,
+  callout: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  callout: state.callout
+});
+
+export default connect(mapStateToProps, { getCallouts })(OpenCallouts);

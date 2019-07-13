@@ -1,0 +1,3 @@
+export const GET_CALLOUTS = 'GET_CALLOUTS';
+export const ADD_CALLOUT = 'ADD_CALLOUT';
+export const DELETE_CALLOUT = 'DELETE_CALLOUT';
