@@ -2,7 +2,7 @@ import { GET_CALLOUTS, ADD_CALLOUT, DELETE_CALLOUT, CALLOUT_LOADING } from '../a
 
 const initialState = {
   callouts: [],
-  loading: false
+  isLoading: false
 };
 
 export default function(state = initialState, action) {
@@ -11,7 +11,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         callouts: action.payload,
-        loading: false
+        isLoading: false
       };
     case DELETE_CALLOUT:
       return {
@@ -26,7 +26,7 @@ export default function(state = initialState, action) {
     case CALLOUT_LOADING:
       return {
         ...state,
-        loading: true
+        isLoading: true
       };
     default:
       return state;
