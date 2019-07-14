@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RegisterModal from './auth/RegisterModal';
 import {
   Collapse,
   Container,
@@ -32,14 +33,7 @@ class NavBar extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className='ml-auto' navbar>
                   <NavItem>
-                    <NavLink href='https://github.com/jaylamping/PipelineApp' target='_blank'>
-                      Github
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink href='https://www.oneok.com' target='_blank'>
-                      ONEOK
-                    </NavLink>
+                    <RegisterModal />
                   </NavItem>
                 </Nav>
               </Collapse>
