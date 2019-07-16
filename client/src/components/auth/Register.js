@@ -101,7 +101,7 @@ class Register extends Component {
             />
             <Label for='password2'>Confirm Password:</Label>
             <Input
-              type='password2'
+              type='password'
               name='password2'
               id='password2'
               placeholder='Confirm Password'
