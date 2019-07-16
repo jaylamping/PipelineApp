@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
-import { login } from '../../actions/authActions';
+import { Redirect } from 'react-router-dom';
+import { register } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 import PropTypes from 'prop-types';
 import {
@@ -10,12 +11,15 @@ import {
   FormGroup,
   Label,
   Input,
+  NavLink,
   Alert
 } from 'reactstrap';
 
-class Login extends Component {
+class Register extends Component {
   
   state = {
+    modal: false,
+    name: '',
     email: '',
     password: '',
     msg: null
@@ -23,20 +27,20 @@ class Login extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
-    login: PropTypes.func.isRequired,
     error: PropTypes.object.isRequired,
-    clearErrors: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired
   };
 
   componentDidUpdate(prevProps) {
-    const { error } = this.props;
+    const { error, isAuthenticated } = this.props;
     if(error !== prevProps.error) {
-      // check for login error
-      if(error.id === 'LOGIN_FAIL') {
+      // check for register error
+      if(error.id === 'REGISTER_FAIL') {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
-      };
+      }
     };
   };
 
@@ -46,22 +50,37 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { email, password } = this.state;
-    const user = {
+    const { name, email, password } = this.state;
+    // create user object
+    const newUser = {
+      name,
       email,
       password
     };
-    // attempt to login
-    this.props.login(user);
+    // attempt to register new user
+    this.props.register(newUser);
   };
 
   render() {
+    // redirect to dashboard if authenticated
+    if(this.props.isAuthenticated) {
+      return <Redirect to='/dashboard' />
+    };
     return(
-      <Container className='login-view'>
-        <h3 className='login-head' align='center'>Login</h3>
+      <Container className='register-view'>
+        <h3 className='register-head' align='center'>Register</h3>
         { this.state.msg ? <Alert color='danger'>{ this.state.msg }</Alert> : null }
-        <Form onSubmit={ this.onSubmit } className='login-form'>
+        <Form onSubmit={ this.onSubmit }>
           <FormGroup>
+            <Label for='name'>Name:</Label>
+            <Input
+              type='text'
+              name='name'
+              id='name'
+              placeholder='Name'
+              onChange={ this.onChange }
+              className='input-field'
+            />
             <Label for='email'>Email:</Label>
             <Input
               type='email'
@@ -80,11 +99,19 @@ class Login extends Component {
               onChange={ this.onChange }
               className='input-field'
             />
+            <Label for='password2'>Confirm Password:</Label>
+            <Input
+              type='password2'
+              name='password2'
+              id='password2'
+              placeholder='Confirm Password'
+              onChange={ this.onChange }
+              className='input-field'
+            />
             <Button 
               color='dark'
-              style={{ marginTop: '2rem' }} block
-              className='login-btn'  
-            >Login</Button>
+              style={{ marginTop: '2rem' }} block  
+            >Register</Button>
           </FormGroup>
         </Form>
       </Container>
@@ -99,5 +126,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps, 
-  { login, clearErrors }
-)(Login);
+  { register, clearErrors }
+)(Register);

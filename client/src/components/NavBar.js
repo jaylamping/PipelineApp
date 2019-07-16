@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import RegisterModal from './auth/RegisterModal';
+import { Link } from 'react-router-dom';
 import Logout from './auth/Logout';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -46,10 +46,10 @@ class NavBar extends Component {
       </Fragment>
     );
 
-    const guestLinks = (
+    const noAuthLinks = (
       <Fragment>
         <NavItem>
-          <RegisterModal />
+          <Link to='/register' className='navbar-text'>Register</Link>
         </NavItem>
       </Fragment>
     );
@@ -58,11 +58,11 @@ class NavBar extends Component {
       <div>
         <Navbar color='dark' dark expand='sm' className='mb-5'>
           <Container>
-            <NavbarBrand href='/'>Comp Tracker</NavbarBrand>
+            <NavbarBrand href='/'>Pipeline Tracker</NavbarBrand>
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className='ml-auto' navbar>
-                  { isAuthenticated ? authLinks : guestLinks }
+                  { isAuthenticated ? authLinks : noAuthLinks }
                 </Nav>
               </Collapse>
           </Container>

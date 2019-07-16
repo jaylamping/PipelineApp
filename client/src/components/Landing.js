@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Container } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Login from './auth/Login';
