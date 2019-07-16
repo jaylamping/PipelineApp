@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getCallouts, deleteCallout, addCallout } from '../actions/calloutActions';
+import { getCallouts, deleteCallout } from '../actions/calloutActions';
 import PropTypes from 'prop-types';
 
 class OpenCallouts extends Component {
+
+  static propTypes = {
+    getCallouts: PropTypes.func.isRequired,
+    callout: PropTypes.object.isRequired
+  };
 
   componentDidMount() {
     this.props.getCallouts();
@@ -45,16 +50,11 @@ class OpenCallouts extends Component {
   };
 };
 
-OpenCallouts.propTypes = {
-  getCallouts: PropTypes.func.isRequired,
-  callout: PropTypes.object.isRequired
-};
-
 const mapStateToProps = state => ({
   callout: state.callout
 });
 
 export default connect(
   mapStateToProps, 
-  { getCallouts, deleteCallout, addCallout }
+  { getCallouts, deleteCallout }
 )(OpenCallouts);

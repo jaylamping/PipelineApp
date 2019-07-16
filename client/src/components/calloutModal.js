@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { addCallout } from '../actions/calloutActions';
 
 class CalloutModal extends Component {
+  
   state = {
     modal: false,
     compressor: '',
