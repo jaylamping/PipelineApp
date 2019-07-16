@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
+import { Container } from 'reactstrap';
+import { connect } from 'react-redux';
+import { login } from '../../actions/authActions';
+import { clearErrors } from '../../actions/errorActions';
+import PropTypes from 'prop-types';
 import {
   Button,
   Form,
   FormGroup,
   Label,
   Input,
-  NavLink,
   Alert
 } from 'reactstrap';
-import { connect } from 'react-redux';
-import { login } from '../../actions/authActions';
-import { clearErrors } from '../../actions/errorActions';
-import PropTypes from 'prop-types';
 
 class Login extends Component {
   
@@ -29,7 +29,7 @@ class Login extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
+    const { error } = this.props;
     if(error !== prevProps.error) {
       // check for login error
       if(error.id === 'LOGIN_FAIL') {
@@ -57,9 +57,10 @@ class Login extends Component {
 
   render() {
     return(
-      <div>
+      <Container className='login-view'>
+        <h3 className='login-head' align='center'>Login</h3>
         { this.state.msg ? <Alert color='danger'>{ this.state.msg }</Alert> : null }
-        <Form onSubmit={ this.onSubmit }>
+        <Form onSubmit={ this.onSubmit } className='login-form'>
           <FormGroup>
             <Label for='email'>Email</Label>
             <Input
@@ -81,11 +82,12 @@ class Login extends Component {
             />
             <Button 
               color='dark'
-              style={{ marginTop: '2rem' }} block  
+              style={{ marginTop: '2rem' }} block
+              className='login-btn'  
             >Login</Button>
           </FormGroup>
         </Form>
-      </div>
+      </Container>
     );
   }
 };

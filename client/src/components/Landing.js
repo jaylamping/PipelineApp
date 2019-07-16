@@ -18,10 +18,8 @@ class Landing extends Component {
     };
 
     return(
-      <section className='landing'>
-        <Container>
-          <Login />
-        </Container>
+      <section className='landing-view'>
+        <Login />
       </section>
     )
   };
