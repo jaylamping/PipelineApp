@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import RegisterModal from './auth/RegisterModal';
-import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -51,9 +50,6 @@ class NavBar extends Component {
       <Fragment>
         <NavItem>
           <RegisterModal />
-        </NavItem>
-        <NavItem>
-          <LoginModal />
         </NavItem>
       </Fragment>
     );

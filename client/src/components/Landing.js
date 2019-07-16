@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Container } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Login from './auth/Login';
 import PropTypes from 'prop-types';
 
 class Landing extends Component {
@@ -17,11 +19,9 @@ class Landing extends Component {
 
     return(
       <section className='landing'>
-        <div className='overlay'>
-          <div className='landing-inner'>
-            <h1 className='x-large'>Pipeline App</h1>
-          </div>
-        </div>
+        <Container>
+          <Login />
+        </Container>
       </section>
     )
   };
