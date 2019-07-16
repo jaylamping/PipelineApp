@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import OpenCallouts from './components/OpenCallouts';
-import CalloutModal from './components/CalloutModal';
+import Landing from './components/Landing';
+import Dashboard from './components/Dashboard';
 
-import { Component } from 'react';
 import { Provider } from 'react-redux';
-import { Container } from 'reactstrap';
 import { loadUser } from './actions/authActions';
 import store from './store';
 
@@ -21,13 +20,13 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
+        <Router>
           <NavBar />
-          <Container>
-            <CalloutModal />
-            <OpenCallouts />
-          </Container>
-        </div>
+          <Switch>
+            <Route exact path='/' component={ Landing } />
+            <Route exact path='/dashboard' component={ Dashboard } />
+          </Switch>
+        </Router>
       </Provider>
     );
   };

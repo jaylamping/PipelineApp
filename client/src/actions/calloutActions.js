@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export const getCallouts = () => async dispatch => {
   dispatch(setCalloutLoading());
-  let res = await axios.get('/api/callouts');
+  const res = await axios.get('/api/callouts');
   dispatch({
     type: GET_CALLOUTS,
     payload: res.data
