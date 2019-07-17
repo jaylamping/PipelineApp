@@ -13,26 +13,33 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case ADD_CALLOUT:
+        return {
+          ...state,
+          callouts: [action.payload, ...state.callouts]
+        };
+    case DELETE_CALLOUT:
+      return {
+        ...state,
+        callouts: state.callouts.filter(
+          click => click._id !== action.payload
+        )
+      };
     case GET_CALLOUTS:
       return {
         ...state,
         callouts: action.payload,
         isLoading: false
       };
-    case DELETE_CALLOUT:
-      return {
-        ...state,
-        callouts: state.callouts.filter(click => click._id !== action.payload)
-      };
-    case ADD_CALLOUT:
-      return {
-        ...state,
-        callouts: [action.payload, ...state.callouts]
-      };
     case SELECT_CALLOUT:
       return {
-        ...state
-        // need to figure out what to do here
+        ...state,
+        callouts: state.callouts.map(item => {
+          if (item._id == action.payload) {
+            item.isSelected = !item.isSelected
+          };
+          return item;
+        })
       };
     case CALLOUT_LOADING:
       return {

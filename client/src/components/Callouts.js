@@ -3,7 +3,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getCallouts, deleteCallout } from '../actions/calloutActions';
+import { getCallouts, deleteCallout, selectCallout } from '../actions/calloutActions';
 import PropTypes from 'prop-types';
 
 
@@ -17,6 +17,10 @@ class Callouts extends Component {
 
   componentDidMount() {
     this.props.getCallouts();
+  };
+
+  onSelectClick = id => {
+    this.props.selectCallout(id);
   };
 
   // onDeleteClick = id => {
@@ -50,7 +54,10 @@ class Callouts extends Component {
     const selectRow = {
       mode: 'checkbox',
       clickToSelect: true,
-      hideSelectAll: true
+      hideSelectAll: true,
+      onSelect: (row) => {
+        this.onSelectClick(row._id);
+      }
     };
 
     return(
@@ -93,5 +100,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps, 
-  { getCallouts, deleteCallout }
+  { getCallouts, deleteCallout, selectCallout }
 )(Callouts);

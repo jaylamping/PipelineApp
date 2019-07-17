@@ -1,15 +1,25 @@
-import { GET_CALLOUTS, ADD_CALLOUT, DELETE_CALLOUT, CALLOUT_LOADING } from '../actions/types';
 import { tokenConfig } from './authActions'; 
 import { returnErrors } from './errorActions';
 import axios from 'axios';
+import { 
+  GET_CALLOUTS, 
+  ADD_CALLOUT, 
+  DELETE_CALLOUT, 
+  CALLOUT_LOADING, 
+  SELECT_CALLOUT 
+} from '../actions/types';
 
 export const getCallouts = () => async dispatch => {
   dispatch(setCalloutLoading());
-  const res = await axios.get('/api/callouts');
-  dispatch({
-    type: GET_CALLOUTS,
-    payload: res.data
-  });
+  try {
+    const res = await axios.get('/api/callouts');
+    dispatch({
+      type: GET_CALLOUTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch(returnErrors(err.response.data, err.response.status));
+  };
 };
 
 export const addCallout = callout => async (dispatch, getState) => {
@@ -34,6 +44,13 @@ export const deleteCallout = id => async (dispatch, getState) => {
   } catch (err) {
     dispatch(returnErrors(err.response.data, err.response.status));
   };
+};
+
+export const selectCallout = id => dispatch => {
+  dispatch({
+    type: SELECT_CALLOUT,
+    payload: id
+  });
 };
 
 export const setCalloutLoading = () => {
