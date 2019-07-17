@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import Callouts from './Callouts';
-import CalloutModal from './CalloutModal';
 import PropTypes from 'prop-types';
 
 class Dashboard extends Component {
@@ -20,7 +19,6 @@ class Dashboard extends Component {
 
     return(
       <Container>
-        <CalloutModal/>
         <Callouts/>
       </Container>
     )

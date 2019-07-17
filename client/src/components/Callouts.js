@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
+import CalloutModal from './CalloutModal';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
@@ -83,6 +84,11 @@ class Callouts extends Component {
             ))}
           </TransitionGroup>
         </ListGroup> */}
+        <Button
+          color='danger'
+          style={{ marginLeft: '.45rem', marginBottom: '1rem', float: 'right'}}
+        >Delete Callouts</Button>
+        <CalloutModal/>
         <BootstrapTable 
           keyField='_id' 
           data={ callouts } 

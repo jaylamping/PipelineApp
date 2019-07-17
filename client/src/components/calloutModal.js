@@ -51,7 +51,7 @@ class CalloutModal extends Component {
       <div>
         <Button
           color='dark'
-          style={{ marginBottom: '2rem' }}
+          style={{ marginBottom: '1rem', float: 'right'}}
           onClick={ this.toggle }
         >Add Callout</Button>
 
