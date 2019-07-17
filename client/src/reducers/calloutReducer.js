@@ -1,4 +1,10 @@
-import { GET_CALLOUTS, ADD_CALLOUT, DELETE_CALLOUT, CALLOUT_LOADING } from '../actions/types';
+import { 
+  GET_CALLOUTS, 
+  ADD_CALLOUT, 
+  DELETE_CALLOUT, 
+  SELECT_CALLOUT, 
+  CALLOUT_LOADING 
+} from '../actions/types';
 
 const initialState = {
   callouts: [],
@@ -23,11 +29,17 @@ export default function(state = initialState, action) {
         ...state,
         callouts: [action.payload, ...state.callouts]
       };
+    case SELECT_CALLOUT:
+      return {
+        ...state
+        // need to figure out what to do here
+      };
     case CALLOUT_LOADING:
       return {
         ...state,
         isLoading: true
       };
+
     default:
       return state;
   };

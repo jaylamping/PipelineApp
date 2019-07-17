@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
-import OpenCallouts from './OpenCallouts';
+import Callouts from './Callouts';
 import CalloutModal from './CalloutModal';
 import PropTypes from 'prop-types';
 
@@ -15,13 +15,13 @@ class Dashboard extends Component {
   render() {
     // redirect to landing if not authenticated
     if(!this.props.isAuthenticated) {
-      return <Redirect to='/' />
+      return <Redirect to='/'/>
     };
 
     return(
       <Container>
-        <CalloutModal />
-        <OpenCallouts />
+        <CalloutModal/>
+        <Callouts/>
       </Container>
     )
   };

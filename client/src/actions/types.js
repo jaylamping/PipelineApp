@@ -1,6 +1,7 @@
 export const GET_CALLOUTS = 'GET_CALLOUTS';
 export const ADD_CALLOUT = 'ADD_CALLOUT';
 export const DELETE_CALLOUT = 'DELETE_CALLOUT';
+export const SELECT_CALLOUT = 'SELECT_CALLOUT';
 export const CALLOUT_LOADING = 'CALLOUT_LOADING';
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// create callout schema 
+// create callout schema
 const calloutSchema = new Schema({
   date: {
     type: Date,
