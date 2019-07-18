@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import CalloutModal from './CalloutModal';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Container, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getCallouts, deleteCallout, selectCallout } from '../actions/calloutActions';
 import PropTypes from 'prop-types';
-
 
 
 class Callouts extends Component {
@@ -24,9 +22,13 @@ class Callouts extends Component {
     this.props.selectCallout(id);
   };
 
-  // onDeleteClick = id => {
-  //   this.props.deleteCallout(id);
-  // };
+  onDeleteClick() {
+    const { callouts } = this.props.callout;
+    const selected = callouts
+      .filter(item => item.isSelected)
+      .map(item => item._id);
+    this.props.deleteCallout(selected);
+  };
 
   render() {
 
@@ -37,19 +39,24 @@ class Callouts extends Component {
       text: 'Callout ID'
     }, {
       dataField: 'compressor',
-      text: 'Compressor'
+      text: 'Compressor',
+      sort: true
     }, {
       dataField: 'area',
-      text: 'Area'
+      text: 'Area',
+      sort: true
     }, {
       dataField: 'explanation',
-      text: 'Explanation'
+      text: 'Explanation',
+      sort: true
     }, {
       dataField: 'operator',
-      text: 'Operator'
+      text: 'Operator',
+      sort: true
     }, {
       dataField: 'date',
-      text: 'Date'
+      text: 'Date',
+      sort: true
     }];
 
     const selectRow = {
@@ -63,38 +70,19 @@ class Callouts extends Component {
 
     return(
       <Container>
-        {/* <ListGroup>
-          <TransitionGroup className='open-callout-list'>
-            {callouts.map(({ _id, compressor, area, explanation, operator }) => (
-              <CSSTransition key={_id} timeout={500} classNames='fade'>
-                <ListGroupItem>
-                  { compressor } | <span/>
-                  { area } | <span/>
-                  { explanation } | <span/>
-                  { operator } | <span/>
-                  { _id }
-                  <Button
-                    className='remove-btn'
-                    color='danger'
-                    size='sm'
-                    onClick={this.onDeleteClick.bind(this, _id)}
-                  >&times;</Button>
-                </ListGroupItem>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-        </ListGroup> */}
         <Button
           color='danger'
           style={{ marginLeft: '.45rem', marginBottom: '1rem', float: 'right'}}
-        >Delete Callouts</Button>
+          onClick={ this.onDeleteClick.bind(this) }
+          >Delete Callouts
+        </Button>
         <CalloutModal/>
         <BootstrapTable 
           keyField='_id' 
           data={ callouts } 
           columns={ columns }
           selectRow={ selectRow }
-          />
+        />
       </Container>
     )
   };

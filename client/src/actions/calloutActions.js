@@ -34,16 +34,18 @@ export const addCallout = callout => async (dispatch, getState) => {
   };
 };
 
-export const deleteCallout = id => async (dispatch, getState) => {
-  try {
-    await axios.delete(`/api/callouts/${id}`, tokenConfig(getState));
-    dispatch({
-      type: DELETE_CALLOUT,
-      payload: id
-    });
-  } catch (err) {
-    dispatch(returnErrors(err.response.data, err.response.status));
-  };
+export const deleteCallout = ids => (dispatch, getState) => {
+  ids.forEach(async id => {
+    try {
+      await axios.delete(`/api/callouts/${id}`, tokenConfig(getState));
+      dispatch({
+        type: DELETE_CALLOUT,
+        payload: id
+      });
+    } catch (err) {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    };
+  });
 };
 
 export const selectCallout = id => dispatch => {
