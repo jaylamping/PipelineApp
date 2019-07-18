@@ -35,7 +35,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         callouts: state.callouts.map(item => {
-          if (item._id == action.payload) {
+          if (item._id === action.payload) {
             item.isSelected = !item.isSelected
           };
           return item;
